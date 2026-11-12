@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true">
+
+<LinearLayout
+    android:id="@+id/bookmarkPanel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:clickable="true"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="14dp"
+    android:background="@drawable/bg_solid_sheet"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_glass_icon"
+            android:contentDescription="书签"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_bookmark_outline" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="书签"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bookmarkCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="13sp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/addCurrentBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_add"
+            android:drawablePadding="4dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="8dp"
+            android:text="收藏当前"
+            android:textColor="@color/primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/bookmarkCloseBtn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="关闭书签"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="关闭"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/glass_stroke" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/bookmarkScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/bookmarkList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="6dp" />
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/bookmarkEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="34dp"
+        android:visibility="gone">
+
+        <ImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:contentDescription="书签为空"
+            android:src="@drawable/ic_bookmark_outline"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="还没有书签"
+            android:textColor="@color/text_secondary"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="点右上角「收藏当前」，或长按顶部路径栏添加"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/bookmarkHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:text="长按书签、或点行尾的「⋮」可重命名 / 复制路径 / 删除"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="11sp"
+        android:visibility="gone" />
+
+    <!-- 删除后的后悔药：只在刚删完的那几秒出现。
+
+         删除本身已经过确认，但「确认」挡不住手快 —— 这一条把删错也变成可逆的。 -->
+    <LinearLayout
+        android:id="@+id/bookmarkUndo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_chip_primary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="6dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/bookmarkUndoText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/on_primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/bookmarkUndoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="撤销"
+            android:textColor="@color/on_primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+</LinearLayout>
+
+<!-- 面板内部的「对话框」（菜单 / 重命名 / 删除确认）。
+
+     教训：在 BottomSheetDialog 之上再弹 AlertDialog，真机上用户什么也看不到 ——
+     从 3.12.1 起，面板里要问的东西一律画在面板自己内部，不开第二个窗口。 -->
+<include layout="@layout/sheet_dialog_layer" />
+</FrameLayout>

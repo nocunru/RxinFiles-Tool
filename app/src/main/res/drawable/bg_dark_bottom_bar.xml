@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    固定深色页面的底栏 / 屏幕按键行。与 `bg_dark_top_bar` 同一套材质，
+    高光线改到**上缘**（底栏压在内容下方，亮边在朝上的那一面）。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/dark_bar_glass" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="top"
+        android:height="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/dark_stroke" />
+        </shape>
+    </item>
+
+</layer-list>

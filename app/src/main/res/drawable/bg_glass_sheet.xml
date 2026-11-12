@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    面板玻璃（BottomSheet / 对话框卡片）：顶部 24dp 圆角 + 顶部一道渐隐高光。
+
+    比顶栏/底栏「实」得多（sheet_fill 浅色 98%/95%、深色 94%/90%）——
+    面板里是正文与按钮，**可读性优先于通透**。液态玻璃用在正文容器上时，
+    透明度每多一分，用户读错的概率就多一分，这个分寸必须自己守住。
+
+    底部不留圆角：面板贴底，圆角会露出底下的窗口背景，反而像没铺满。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:endColor="@color/sheet_fill_bottom"
+                android:startColor="@color/sheet_fill_top" />
+            <corners
+                android:topLeftRadius="24dp"
+                android:topRightRadius="24dp" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/glass_stroke" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="top"
+        android:height="2dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:endColor="#00FFFFFF"
+                android:startColor="@color/glass_highlight" />
+            <corners
+                android:topLeftRadius="24dp"
+                android:topRightRadius="24dp" />
+        </shape>
+    </item>
+
+</layer-list>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 压缩包内的一个条目；目录逐级浏览，搜索结果显示完整路径。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingVertical="8dp">
+
+    <ImageView
+        android:id="@+id/entryIcon"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@drawable/bg_glass_icon"
+        android:contentDescription="条目图标"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_file" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/entryName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="middle"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            android:textFontWeight="500"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/entryDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="middle"
+            android:maxLines="1"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/entryAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="3dp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="10sp"
+        android:visibility="gone" />
+</LinearLayout>

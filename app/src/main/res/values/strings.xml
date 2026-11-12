@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RxinFiles-Tool</string>
+    <string name="copy_text">复制</string>
+    <string name="paste_text">粘贴</string>
+    <string name="text_selection_more">更多</string>
+    <!-- 终端默认普通用户；仅在用户显式选择「以 ROOT 执行」脚本时才是 root 会话 -->
+    <string name="terminal_mode_text">终端 普通用户模式</string>
+    <string name="terminal_mode_root">终端 ROOT 模式</string>
+
+    <!--
+        脚本结束态（3.13.1）。脚本跑完后终端不再是「可用的终端」：
+        输出留在屏幕上，但任何输入都会退回文件管理，所以必须有一句明说。
+    -->
+    <string name="terminal_script_done">脚本已结束</string>
+    <string name="terminal_script_done_code">脚本已结束 · 退出码 %1$s</string>
+    <string name="terminal_script_done_hint">敲任意键或点此条返回文件管理 · 可上下滑动查看、长按复制输出</string>
+</resources>

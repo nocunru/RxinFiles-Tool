@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    液态玻璃色板 —— 浅色基准（深色覆写在 values-night/colors.xml）。
+
+    设计意图：玻璃的「通透感」来自**背景比它更丰富**。所以这里同时定义两组东西：
+      1. 页面背景（app_bg_*）—— 上浅下深的微渐变 + 主色柔光晕，它是玻璃的「底」；
+      2. 玻璃层（glass_*）—— 半透明填充 + 描边 + 顶部高光。
+    只做第 2 组、不给第 1 组，玻璃层叠在纯色上只会变成「一块更浅的纯色」。
+
+    主色采用靛蓝与淡紫，深色模式提高亮度，保持与网页端一致的工作台气质。
+-->
+<resources>
+
+    <color name="primary">#FF6259C7</color>
+    <color name="primary_dark">#FF443A92</color>
+    <color name="primary_container">#296258C7</color>
+    <color name="on_primary">#FFFFFFFF</color>
+
+    <color name="app_bg_top">#FFF8F8FD</color>
+    <color name="app_bg_bottom">#FFE9EAF5</color>
+    <color name="glow_primary">#365F5CFF</color>
+
+    <color name="glass_fill_top">#E8FFFFFF</color>
+    <color name="glass_fill_bottom">#C4FFFFFF</color>
+    <color name="glass_stroke">#14000000</color>
+    <color name="glass_highlight">#FFFFFFFF</color>
+
+    <!--
+        遮挡型玻璃：顶栏 / 底栏专用，比点缀型实得多（95% / 93%）。
+
+        主界面的栏与列表不重叠；较高不透明度用于保持文字与按钮清晰。
+        玻璃的「透」只呈现窗口背景光，不让内容干扰栏内信息。
+    -->
+    <color name="glass_bar_top">#F2FFFFFF</color>
+    <color name="glass_bar_bottom">#EDFFFFFF</color>
+
+    <color name="sheet_fill_top">#FAFFFFFF</color>
+    <color name="sheet_fill_bottom">#F2FFFFFF</color>
+
+    <!--
+        面板里的卡片表面：要比页面背景**更亮一档**，卡片才浮得起来。
+        深色下尤其要紧 —— 拿 app_bg_top（最暗）当卡片色时，卡片会和「遮罩下的列表」
+        糊成一片、看不出边界（真机截图里验证过）。
+    -->
+    <color name="card_surface">#FFFFFFFF</color>
+    <color name="quick_action_surface">#B8FFFFFF</color>
+
+    <color name="text_primary">#FF11161D</color>
+    <color name="text_secondary">#FF5C6675</color>
+    <color name="text_tertiary">#FF7B8496</color>
+
+    <color name="selection_highlight">#296258C7</color>
+    <color name="reveal_highlight">#66FFB300</color>
+
+    <color name="danger">#FFD93025</color>
+    <color name="warn">#FFC77800</color>
+    <color name="success">#FF2E7D32</color>
+
+    <!--
+        固定深色组：终端页与图像查看器专用。
+
+        这两个页面用的是 `Theme.RouXin.Terminal`（恒深色，不跟随系统），所以**不能**引用
+        `glass_*` —— 那一组会被 `values-night/colors.xml` 覆写成浅色值，于是在**浅色系统**下
+        打开它们，顶栏底栏会变成 95% 白条压在深色内容上。这组色只在本文件定义，night 不覆盖。
+
+        条用「90% 不透明的深色 + 朝向内容那面 1dp 白高光」而不是纯色 ——
+        图像查看器的顶栏背后是图片，能隐约透出来，那才是玻璃。
+    -->
+    <color name="dark_bar_glass">#E6161B22</color>
+    <color name="dark_stroke">#1AFFFFFF</color>
+    <color name="dark_key">#0DFFFFFF</color>
+    <color name="dark_key_stroke">#1AFFFFFF</color>
+    <color name="dark_ripple">#26FFFFFF</color>
+
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    顶栏「⋯」的面板容器。
+
+    与排序面板不同：这张面板**本体不承载内容** —— 菜单由 SheetDialog 画在
+    它之上的卡片里（书签、压缩包两个面板也是这么共用 sheet_dialog_layer 的）。
+    所以这里只放一个拖拽指示条 + include，不自己画行。
+
+    为什么要单独建一个容器、而不是借用 bookmarks 那张：面板本体的内容会显示出来，
+    借用的结果就是「点⋯先闪一下书签列表」。
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="18dp">
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_sheet_handle" />
+    </LinearLayout>
+
+    <include layout="@layout/sheet_dialog_layer" />
+</FrameLayout>

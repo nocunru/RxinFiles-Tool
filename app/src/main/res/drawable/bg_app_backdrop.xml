@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    页面背景质感层 = 线性微渐变 + 主色柔光晕。
+
+    两个作用：
+      1. 给玻璃层一个「有东西可透」的底（否则玻璃 = 更浅的纯色，白做）；
+      2. 左上方那团主色光晕会让浮在上面的玻璃边缘看起来「被照亮」——
+         这是液态玻璃里最省成本、也最见效的一招。
+
+    光晕用 radial 渐变，靠 gravity=top + 固定高度限制在顶部一带，不铺满全屏。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:startColor="@color/app_bg_top"
+                android:endColor="@color/app_bg_bottom"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="top"
+        android:height="380dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerX="0.22"
+                android:centerY="0.0"
+                android:endColor="#00000000"
+                android:gradientRadius="460dp"
+                android:startColor="@color/glow_primary"
+                android:type="radial" />
+        </shape>
+    </item>
+
+</layer-list>

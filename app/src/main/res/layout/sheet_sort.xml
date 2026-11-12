@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    排序方式面板。
+
+    面板内容整体可滚动：横屏矮窗口中标题、六个排序行与完成按钮都仍可达。
+    行样式统一走 @style/SortRow（minHeight 48dp 整行可点，达到触控下限）。
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="12dp">
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_sheet_handle" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="排序方式"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sortSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/sortByName"
+            style="@style/SortRow" />
+
+        <TextView
+            android:id="@+id/sortBySize"
+            style="@style/SortRow" />
+
+        <TextView
+            android:id="@+id/sortByTime"
+            style="@style/SortRow" />
+
+        <TextView
+            android:id="@+id/sortByType"
+            style="@style/SortRow" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="6dp"
+            android:background="@color/glass_stroke" />
+
+        <TextView
+            android:id="@+id/sortOrder"
+            style="@style/SortRow" />
+
+        <TextView
+            android:id="@+id/sortDirsFirst"
+            style="@style/SortRow" />
+
+        <TextView
+            android:id="@+id/sortClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="4dp"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:minHeight="44dp"
+            android:paddingHorizontal="14dp"
+            android:text="完成"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

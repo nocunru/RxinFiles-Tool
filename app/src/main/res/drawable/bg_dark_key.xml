@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    终端屏幕按键行上的单个键帽。
+
+    原来是 `?selectableItemBackground`（一条方方正正的无边界波纹），
+    在一排十来个键里没有任何「键」的形状感。这里给成 10dp 圆角的淡玻璃块：
+    1dp 描边 + 8% 填充 + 白波纹，按下去仍然是原生的波纹反馈。
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/dark_ripple">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/dark_key" />
+            <corners android:radius="10dp" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/dark_key_stroke" />
+        </shape>
+    </item>
+</ripple>

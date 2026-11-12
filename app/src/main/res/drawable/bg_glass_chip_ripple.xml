@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    可点击的玻璃胶囊：外观是 bg_glass_chip，反馈是主色波纹。
+
+    单独做一个而不是直接用 bg_glass_chip，是因为 `?selectableItemBackground`
+    只有系统默认的灰 ripple，和玻璃胶囊的观感割裂；
+    直接给 shape 又完全没有按下反馈（玻璃上「点了没动静」比没玻璃更糟）。
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/primary_container">
+    <item android:drawable="@drawable/bg_glass_chip" />
+</ripple>

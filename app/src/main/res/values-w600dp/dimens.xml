@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="content_max_width">760dp</dimen>
+    <dimen name="dialog_content_max_width">640dp</dimen>
+    <dimen name="page_padding">32dp</dimen>
+    <dimen name="form_padding">28dp</dimen>
+</resources>

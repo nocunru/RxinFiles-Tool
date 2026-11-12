@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    液态玻璃色板 —— 深色覆写。
+
+    深色下的玻璃与浅色是**两套相反的做法**：
+      浅色 = 白色降低不透明度（玻璃比底亮一点点）；
+      深色 = 白色提高不透明度但基数极低（12% → 6%），靠**白色描边与顶部高光**撑出「一片薄玻璃」。
+
+    深色下主色必须提亮：淡紫在近黑底上保持按钮与强调文字的清晰度。
+-->
+<resources>
+
+    <color name="primary">#FFA89FFF</color>
+    <color name="primary_dark">#FF8B7CFF</color>
+    <color name="primary_container">#338B7CFF</color>
+    <color name="on_primary">#FF0A1017</color>
+
+    <color name="app_bg_top">#FF080D18</color>
+    <color name="app_bg_bottom">#FF121A2A</color>
+    <color name="glow_primary">#3D8B7CFF</color>
+
+    <color name="glass_fill_top">#1FFFFFFF</color>
+    <color name="glass_fill_bottom">#0FFFFFFF</color>
+    <color name="glass_stroke">#26FFFFFF</color>
+    <color name="glass_highlight">#4DFFFFFF</color>
+
+    <!--
+        遮挡型玻璃用**背景色系**而不是纯白：深色下 12% 白近乎全透。
+        这里使用 77% / 72% 不透明的深蓝黑，保留玻璃质感与栏内文字可读性。
+    -->
+    <color name="glass_bar_top">#C4141B25</color>
+    <color name="glass_bar_bottom">#B8121A23</color>
+
+    <color name="sheet_fill_top">#F0141A22</color>
+    <color name="sheet_fill_bottom">#E610151C</color>
+
+    <!-- 比 app_bg_top(#080D18) 与 app_bg_bottom(#121A2A) 都亮一档 —— 卡片要浮在背景之上 -->
+    <color name="card_surface">#FF1B2430</color>
+    <color name="quick_action_surface">#8A1B2430</color>
+
+    <color name="text_primary">#FFE6EDF3</color>
+    <color name="text_secondary">#FF9BA7B4</color>
+    <color name="text_tertiary">#FF7F8CA0</color>
+
+    <color name="selection_highlight">#40A89FFF</color>
+    <color name="reveal_highlight">#66D8A657</color>
+
+    <color name="danger">#FFF85149</color>
+    <color name="warn">#FFD8A657</color>
+    <color name="success">#FF7EE787</color>
+
+</resources>

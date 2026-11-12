@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_glass_top_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="6dp">
+
+        <TextView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="‹ 返回"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingHorizontal="4dp">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:maxLines="1"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subtitleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/findBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="8dp"
+            android:text="查找"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/editBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="8dp"
+            android:text="编辑"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="保存"
+            android:textColor="@color/success"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/moreBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="⋮"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/findBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_glass_top_bar"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/findInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="查找内容"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:minWidth="72dp"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/findPrev"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?selectableItemBackground"
+                android:contentDescription="上一个"
+                android:gravity="center"
+                android:minWidth="44dp"
+                android:paddingHorizontal="8dp"
+                android:text="◀"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/findNext"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?selectableItemBackground"
+                android:contentDescription="下一个"
+                android:gravity="center"
+                android:minWidth="44dp"
+                android:paddingHorizontal="8dp"
+                android:text="▶"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/findCount"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:minWidth="52dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/warn"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/findList"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?selectableItemBackground"
+                android:contentDescription="命中列表"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                android:text="列表"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/findClose"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="?selectableItemBackground"
+                android:contentDescription="关闭查找"
+                android:gravity="center"
+                android:minWidth="44dp"
+                android:paddingHorizontal="8dp"
+                android:text="✕"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <HorizontalScrollView
+                android:id="@+id/hScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal">
+
+                <com.rxinfiles.tool.HighlightTextView
+                    android:id="@+id/contentText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:lineSpacingExtra="2dp"
+                    android:padding="16dp"
+                    android:textIsSelectable="true"
+                    android:textSize="13sp" />
+            </HorizontalScrollView>
+        </ScrollView>
+
+        <EditText
+            android:id="@+id/contentEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:fontFamily="monospace"
+            android:gravity="top|start"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:lineSpacingExtra="2dp"
+            android:padding="16dp"
+            android:scrollbars="vertical|horizontal"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="24dp"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!--
+        片导航条：大文件被切成多片时才有意义，所以默认 gone。
+        单片文件（绝大多数）看不到它 —— 分片对老用户是透明的。
+    -->
+    <LinearLayout
+        android:id="@+id/sliceBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_glass_top_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/slicePrev"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:contentDescription="上一片"
+            android:gravity="center"
+            android:text="◀"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/sliceInfo"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/sliceNext"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:contentDescription="下一片"
+            android:gravity="center"
+            android:text="▶"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_glass_bottom_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp">
+
+        <TextView
+            android:id="@+id/wrapBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:text="换行: 关"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/fontBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:text="字号 13"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/jumpBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:text="跳到行…"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/charsetBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:text="编码"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    图像查看器。
+
+    与终端页同一套处理：配色（黑底 + GitHub Dark 条）是刻意的，不动；
+    只把两条栏换成 `bg_dark_*`（90% 不透明深色 + 朝向内容的 1dp 白高光），
+    并把按钮抬到 40dp。
+
+    顶栏在这里尤其值得用半透明 —— 它背后就是图片本身，
+    图片滚过顶栏下缘时能隐约透出来，这是整个应用里玻璃感最强的一处。
+    `topBar` / `bottomBar` 的 id 与显隐逻辑（沉浸式全屏）完全没动。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF000000"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dark_top_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp">
+
+        <TextView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="‹ 返回"
+            android:textColor="#FFC9D1D9"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingHorizontal="4dp">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:maxLines="1"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subtitleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/rotateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="旋转"
+            android:textColor="#FFC9D1D9"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/fitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="适应"
+            android:textColor="#FFC9D1D9"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/actualBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="1:1"
+            android:textColor="#FFC9D1D9"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/moreBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="⋮"
+            android:textColor="#FFC9D1D9"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.rxinfiles.tool.ZoomImageView
+            android:id="@+id/zoomView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="#FF7EE787"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="24dp"
+            android:textColor="#FF8B949E"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dark_bottom_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp">
+
+        <TextView
+            android:id="@+id/prevBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:text="◀ 上一张"
+            android:textColor="#FFC9D1D9"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/infoBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:text="信息"
+            android:textColor="#FF7EE787"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/nextBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:text="下一张 ▶"
+            android:textColor="#FFC9D1D9"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

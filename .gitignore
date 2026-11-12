@@ -1,0 +1,32 @@
+# ---- Android / Gradle ----
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
+
+# ---- 签名与密钥（绝不提交） ----
+*.jks
+*.keystore
+keystore.properties
+
+# ---- 构建产物 ----
+*.apk
+*.aab
+dist/
+
+# ---- Python / 工具套件生成物 ----
+__pycache__/
+*.pyc
+tools/*/build/
+tools/*/out/
+tools/rxinbox/_retired/
+
+# ---- 系统 ----
+.DS_Store
+Thumbs.db

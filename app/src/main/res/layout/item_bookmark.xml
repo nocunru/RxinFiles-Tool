@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    android:background="@drawable/bg_file_row"
+    android:foreground="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="64dp"
+    android:orientation="horizontal">
+
+    <!-- 当前所在目录的左侧指示条 -->
+    <View
+        android:id="@+id/currentBar"
+        android:layout_width="3dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="6dp"
+        android:background="@color/primary"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/bookmarkIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/bg_glass_icon"
+        android:contentDescription="书签图标"
+        android:padding="7dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_bookmark_outline" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingVertical="12dp">
+
+        <TextView
+            android:id="@+id/bookmarkName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/bookmarkPath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="middle"
+            android:maxLines="1"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/currentBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/bg_chip_primary"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="3dp"
+        android:text="当前"
+        android:textColor="@color/on_primary"
+        android:textSize="10sp"
+        android:visibility="gone" />
+
+    <!-- 行内只留「更多」，不再留删除。
+
+         这条按钮原来是 ic_delete，位置就在单手滑动时拇指的落点上，误触一次
+         书签就没了。现在它只打开菜单（重命名 / 复制路径 / 删除），删除还要
+         再确认一次，并且面板底部提供「撤销」—— 三道闸门，点错任何一次都不
+         会真的丢书签。 -->
+    <ImageButton
+        android:id="@+id/moreBtn"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="2dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="更多操作"
+        android:padding="13dp"
+        android:src="@drawable/ic_more_vert" />
+</LinearLayout>

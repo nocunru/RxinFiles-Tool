@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    固定深色页面的顶栏（终端 / 图像查看器）。
+
+    与浅色那套 `bg_glass_top_bar` 是两回事：那个引用 `@color/glass_*`，会随系统深浅模式变；
+    这里引用的是 `@color/dark_*`（只在 values/ 定义），所以**任何系统主题下都是深色**。
+
+    高光线放在**底缘** —— 顶栏压在内容上方，光从上往下照，亮边在它朝下的那一面。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/dark_bar_glass" />
+        </shape>
+    </item>
+
+    <item
+        android:gravity="bottom"
+        android:height="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/dark_stroke" />
+        </shape>
+    </item>
+
+</layer-list>

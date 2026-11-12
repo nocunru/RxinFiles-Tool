@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="page_padding">12dp</dimen>
+    <dimen name="form_padding">16dp</dimen>
+    <dimen name="section_spacing">12dp</dimen>
+    <dimen name="section_spacing_small">8dp</dimen>
+    <dimen name="primary_button_height">48dp</dimen>
+</resources>

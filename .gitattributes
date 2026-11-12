@@ -1,0 +1,24 @@
+# 统一换行符：仓库内一律 LF；Windows 批处理保留 CRLF
+* text=auto
+*.bat text eol=crlf
+gradlew text eol=lf
+*.sh text eol=lf
+*.mk text eol=lf
+
+# 二进制：不要做换行/文本转换
+*.jar binary
+*.so binary
+*.apk binary
+*.aab binary
+*.jks binary
+*.keystore binary
+*.png binary
+*.webp binary
+*.7z binary
+*.rar binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.bz2 binary
+*.xz binary
+*.lzma binary

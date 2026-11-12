@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+    <!--
+        android:extractNativeLibs 必须是 true。
+
+        jniLibs 里除了 libtermux.so，还有一个 libbusybox.so —— 它其实不是给
+        dlopen 用的库，而是一个「当命令 exec」的多调用二进制（busybox），
+        只是借 `lib*.so` 这个名字随包分发（nativeLibraryDir 下只收这种形式的文件）。
+
+        为什么必须落盘：
+          Android 10 起 untrusted_app 对 app_data_file 没有 execute_no_trans
+          （AOSP app_neverallows.te 里是 neverallow），所以「把二进制复制到
+          filesDir/dataDir 再执行」会被 SELinux 直接拒掉；能把命令跑起来的
+          唯一位置是 nativeLibraryDir
+          （/data/app/~~xxx/pkg-yyy/lib/arm64/，SELinux 类型是 apk_data_file）。
+
+          而 extractNativeLibs="false" 时系统走 android_dlopen_ext 从 APK 内 mmap 加载，
+          磁盘上压根没有实体文件——那条路只对 dlopen 有意义，对「当命令 exec」没有意义。
+
+        二进制本身是 NDK 交叉编译 + Bionic 动态链接（PIE，解释器 /system/bin/linker64，
+        NEEDED 只有 libc/libm/libdl）。不能用 musl 静态版：musl 启动代码会调
+        set_robust_list，被 app 沙盒的 seccomp TRAP 成 SIGSYS，exec 后立即被杀。
+        构建脚本：tools/rxinbox/build-busybox.py
+
+        这个属性写在 manifest 里是有意的：AGP 的 packaging.jniLibs.useLegacyPackaging
+        会与 manifest 显式声明同步，但 manifest 的值才是最终生效的那个，
+        两边都写以免后续改动时对不上。
+    -->
+    <application
+        android:name=".RxinApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:extractNativeLibs="true"
+        android:theme="@style/Theme.RouXin"
+        tools:targetApi="34">
+
+        <activity
+            android:name=".DisclaimerActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.RouXin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            「用其他应用打开」的入口。
+
+            只做 ACTION_VIEW + DEFAULT + mimeType */* —— 这样就出现在**所有**文件的
+            「用其他应用打开」列表里。**刻意不做 ACTION_SEND**：那是「分享」，语义是
+            「把文件发给别人」，与「我自己要把这个文件看开」是两回事，混在一起反而会让
+            这个 App 出现在不该出现的分享目标里。
+
+            exported="true" 是必须的（否则系统不会把 Intent 派过来），代价是这个
+            Activity 的入参完全由对方控制。所有不可信输入的校验都在
+            IncomingActivity / IncomingFile 里成文列出（scheme 白名单、文件名消毒、
+            不信任任何 extra、不执行脚本）。
+
+            excludeFromRecents：它只是个「中转站」，不该在最近任务里留下一条空壳。
+        -->
+        <activity
+            android:name=".IncomingActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.RouXin"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:mimeType="*/*" />
+                <data android:scheme="file" android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.RouXin" />
+
+        <activity
+            android:name=".TerminalActivity"
+            android:exported="false"
+            android:label="Terminal"
+            android:theme="@style/Theme.RouXin.Terminal"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--
+            图片查看器：全屏黑底看图，深色主题不会在翻页时闪白。
+            configChanges 不拦旋转 —— 旋转后按新宽度重新解码/重新适配即可，
+            自己处理反而容易和 ZoomImageView 的矩阵状态打架。
+        -->
+        <activity
+            android:name=".ImageViewerActivity"
+            android:exported="false"
+            android:label="图片"
+            android:theme="@style/Theme.RouXin.Terminal" />
+
+        <activity
+            android:name=".VideoViewerActivity"
+            android:exported="false"
+            android:label="视频"
+            android:theme="@style/Theme.RouXin.Terminal" />
+
+        <!-- 文本浏览器/轻量编辑器：有编辑框，键盘必须把内容顶上去而不是遮住 -->
+        <activity
+            android:name=".TextViewerActivity"
+            android:exported="false"
+            android:label="文本"
+            android:theme="@style/Theme.RouXin"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--
+            FileProvider：把「用其它应用打开 / 分享」暴露成 content://。
+            Android 7 起 file:// 会直接抛 FileUriExposedException，
+            而且只有 content:// 才能精确授予临时读权限。
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Shizuku: 提供 adb 级别权限的桥接 -->
+        <provider
+            android:name="rikka.shizuku.ShizukuProvider"
+            android:authorities="${applicationId}.shizuku"
+            android:multiprocess="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
+
+        <!-- Shizuku UserService 是 Binder 实现，不是 android.app.Service，无需在此注册。 -->
+
+    </application>
+</manifest>

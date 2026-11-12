@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    FileProvider 可对外暴露的路径。
+
+    覆盖三片区域：
+      · external-*  —— /sdcard 上的普通文件，这是绝大多数「分享/打开」的来源；
+      · files/cache —— 私有目录，其中 cache/rxin_stage 是 root 文件被「借」出来时
+                       的落地位置（见 FileOps.stageToCache），必须先拷进来才分享得出去；
+      · root-path   —— 兜底：以 root 身份浏览 /data 时，被打开的文件可能在任何地方，
+                       FileProvider 没有 per-volume 的表示法，只能放开根。
+
+    放开根并不等于放开访问：provider 自身 exported=false，每个 URI 都要靠
+    Intent 上的 FLAG_GRANT_READ_URI_PERMISSION 逐个授权，接收方拿不到目录列表。
+-->
+<paths>
+    <external-path
+        name="external"
+        path="." />
+    <external-files-path
+        name="external_files"
+        path="." />
+    <external-cache-path
+        name="external_cache"
+        path="." />
+    <files-path
+        name="files"
+        path="." />
+    <cache-path
+        name="cache"
+        path="." />
+    <root-path
+        name="root"
+        path="/" />
+</paths>

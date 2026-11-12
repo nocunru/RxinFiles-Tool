@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    图标底托：12dp 圆角的小玻璃块，给列表里那颗 24~36dp 的图标一个「落在玻璃上」的承托。
+
+    列表项本身不做卡片（选中底色由 `FileListAdapter.setBackgroundColor` 直接铺满整行，
+    改成卡片会把选中态切成两半，得不偿失）——
+    所以质感下沉到图标这一级：底托 + 行距，用最小改动拿到「有材质」的观感。
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:endColor="@color/glass_fill_bottom"
+        android:startColor="@color/glass_fill_top" />
+    <corners android:radius="12dp" />
+    <stroke
+        android:width="1dp"
+        android:color="@color/glass_stroke" />
+</shape>

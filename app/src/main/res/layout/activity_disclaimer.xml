@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    免责声明页。内容列在平板/桌面窗口限制为最大阅读宽度；
+    按钮高度用 minHeight，跟随系统字体缩放而不裁字。
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/page_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="@dimen/content_max_width"
+        app:layout_constraintWidth_min="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/themeToggle"
+                style="?materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="44dp"
+                android:text="切换主题"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:text="重要声明"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/versionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0.6"
+            android:text="RxinFiles-Tool"
+            android:textSize="14sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:layout_marginBottom="@dimen/section_spacing_small"
+            android:layout_weight="1"
+            android:background="@drawable/bg_glass_card"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.4"
+                android:text="【重要声明】\n\n感谢您选择使用 RxinFiles-Tool。\n\n一、软件性质\n本软件是一款 Android 终端脚本执行工具，仅提供文件管理、脚本执行与终端功能。\n\n二、权限说明\n本软件可运行于普通权限、ADB 权限（通过 Shizuku）或 Root 权限下。\n不同权限级别可访问的系统范围不同，请根据自身需要谨慎选择。\n\n三、风险提示\n使用高权限（ADB / Root）具有风险，可能导致系统不稳定或数据丢失。\n执行未知来源的脚本可能造成系统损坏。\n请务必在执行任何脚本前确认其内容与来源。\n\n四、用户责任\n用户使用本软件执行的任何操作与脚本，其内容及后果由用户自行负责。\n本软件不对执行结果承担任何责任。\n\n五、禁止用途\n严禁利用本软件从事：\n- 侵犯他人计算机系统或隐私\n- 传播病毒或恶意程序\n- 进行网络攻击\n- 其他违法活动\n\n六、免责条款\n在法律允许的最大范围内，本软件按现状提供，不提供任何形式的担保。\n\n七、条款确认\n使用本软件即表示您已阅读、理解并同意上述所有条款。"
+                android:textSize="14sp" />
+        </ScrollView>
+
+        <CheckBox
+            android:id="@+id/agreeCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/section_spacing_small"
+            android:padding="8dp"
+            android:text="我已阅读并同意上述所有条款" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/disagreeBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/danger"
+                android:minHeight="@dimen/primary_button_height"
+                android:text="不同意" />
+
+            <Button
+                android:id="@+id/agreeBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:enabled="false"
+                android:minHeight="@dimen/primary_button_height"
+                android:text="同意并进入" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

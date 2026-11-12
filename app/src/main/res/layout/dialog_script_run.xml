@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  执行脚本前的确认面板（对话框的内容区，标题与按钮由 AlertDialog 提供）。
+
+  这个框问的是**要不要执行**，不是「用哪个身份」——
+  身份只有两级，而「普通用户（应用自身身份）」是默认值，所以它退化成一个勾选框：
+  `以 ROOT 身份执行（su）`。没探测到 root 时，这一行整个不出现，
+  只在下面留一句说明，而不是给一个点了没用的灰勾选框。
+
+  勾选与否，脚本能碰到的文件范围完全不同（root 可以读写系统分区与其它应用的数据），
+  所以勾选状态会同时改三处：右侧身份标签、下面那句说明、说明文字的颜色。
+  这正是「用户自己决定要不要提权」，而不是替他把这件事含糊过去。
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!-- 跑的是哪一份脚本：文件名 + 完整路径。
+         同名脚本在不同目录里很常见，执行前唯一能核对的就是这条路径 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="40dp"
+            android:contentDescription="脚本"
+            android:src="@drawable/ic_script" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/scriptRunName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:maxLines="2"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/scriptRunPath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:alpha="0.55"
+                android:ellipsize="start"
+                android:maxLines="1"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 这次会以什么身份跑。标签放在这里，是为了让「要不要提权」
+             在一眼扫过时就能看见，而不是只藏在勾选框旁边的说明里 -->
+        <TextView
+            android:id="@+id/scriptRunTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:alpha="0.12"
+        android:background="@color/glass_stroke" />
+
+    <TextView
+        android:id="@+id/scriptRunDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:lineSpacingExtra="2dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="12sp" />
+
+    <!-- 提权勾选行。整行可点：勾选框本身在手机上是很难精准点中的小目标 -->
+    <LinearLayout
+        android:id="@+id/scriptRunRootRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
+
+        <CheckBox
+            android:id="@+id/scriptRunRootCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:minWidth="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="以 ROOT 身份执行（su）"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/scriptRunRootHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:alpha="0.55"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 没有 root：替代上面那一行。说明「为什么没有这个选项」，
+         而不是让用户以为功能坏了 -->
+    <TextView
+        android:id="@+id/scriptRunNoRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:alpha="0.6"
+        android:lineSpacingExtra="2dp"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <!-- 带参数入口专用 -->
+    <EditText
+        android:id="@+id/scriptRunArgs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="参数，例如：-v /sdcard/out.txt"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <!-- 管道（后台）通道专用：这条路的限制与终端不同，得在执行前说清 -->
+    <TextView
+        android:id="@+id/scriptRunChannelHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:alpha="0.6"
+        android:lineSpacingExtra="2dp"
+        android:textSize="11sp"
+        android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>

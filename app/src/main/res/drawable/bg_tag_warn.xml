@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 条目行右侧的小标签底（「需密码」），以及面板头部那条「有加密条目」。
+
+     与 bg_tag_soft 同一套路：底色固定、文字色在布局里给。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="9dp" />
+    <solid android:color="#26C77800" />
+</shape>

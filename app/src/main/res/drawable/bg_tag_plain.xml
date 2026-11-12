@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 条目行右侧的小标签底（扩展名）。
+
+     比另外两种更淡：它只是「一眼看出这是什么文件」，不该抢注意力。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="9dp" />
+    <solid android:color="#1A808080" />
+</shape>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    顶栏的「终端」入口。
+
+    原来这里是写着「终端」二字的 MaterialButton，占 48dp 宽。改成 24dp 图标后
+    只占 40dp 的触控区，而且和旁边的刷新、更多两个图标**视觉重量一致** ——
+    一行里既有图标又有文字按钮，本身也是拥挤感的一半来源（对齐基准都不一样）。
+
+    取「>_」这个终端符号：它比一个通用的「电脑」图标更能说明这是 shell。
+    颜色交给调用处的 app:iconTint，不写死在这里 —— 深色模式下主色会变亮。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M4.5,7.2 L9.3,12 L4.5,16.8"
+        android:strokeColor="#FF000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M12.6,17 L19.5,17"
+        android:strokeColor="#FF000000"
+        android:strokeLineCap="round"
+        android:strokeWidth="2" />
+</vector>

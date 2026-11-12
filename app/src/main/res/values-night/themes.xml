@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        深色下只需改两处：状态栏/导航栏的图标要转白。
+        其余（windowBackground 指向的 bg_app_backdrop）会自动跟着
+        values-night/colors.xml 里的 app_bg_* 变成深色，不必在这里重复声明。
+    -->
+    <style name="Theme.RouXin" parent="Theme.RouXin.Base">
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+</resources>

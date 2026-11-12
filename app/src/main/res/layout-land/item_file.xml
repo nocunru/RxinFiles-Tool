@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    横屏/矮屏用的紧凑文件行：高度从 74dp 压到 56dp，
+    图标、字号和边距同步缩小，列表一屏能多显示约一行。
+    id 与竖屏 item_file 完全一致，Adapter 无需改动。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="2dp"
+    android:layout_marginVertical="2dp"
+    android:background="@drawable/bg_file_row"
+    android:foreground="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="56dp"
+    android:orientation="horizontal"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="6dp">
+
+    <ImageView
+        android:id="@+id/fileIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/bg_glass_icon"
+        android:contentDescription="图标"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_folder" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            android:textFontWeight="500"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/fileDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_tertiary"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/fileAction"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="操作"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_chevron_right" />
+</LinearLayout>

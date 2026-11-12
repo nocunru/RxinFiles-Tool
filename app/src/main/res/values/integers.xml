@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="file_list_columns">1</integer>
+    <integer name="bookmark_list_height_percent">62</integer>
+    <integer name="incoming_report_height_percent">50</integer>
+    <integer name="script_log_height_percent">42</integer>
+</resources>

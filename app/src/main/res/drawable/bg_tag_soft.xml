@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 条目行右侧的小标签底（「可预览」）。
+
+     底色写死成半透明色而不是引主题属性：XML drawable 的 solid 不支持 ?attr，
+     而这里要的只是「比背景稍浓一点点」的效果，深浅主题下都成立。
+     文字色由布局里的 TextView 给（那边可以用 ?attr）。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="9dp" />
+    <solid android:color="#264A6FA5" />
+</shape>

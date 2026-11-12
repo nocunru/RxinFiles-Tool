@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    终端页。
+
+    配色是刻意的 GitHub Dark（页面 #0D1117、条 #161B22、提示绿 #7EE787），
+    与终端生态对齐 —— 这一层**不动**，改的只是条与键的材质：
+
+      1. 顶栏 / TabLayout / 按键行统一换成 `bg_dark_*`（90% 不透明的深色 + 朝向内容的
+         1dp 白高光）。用半透明而不是纯色，是因为条下面就是终端输出，
+         隐约透出来才有层次；用 `dark_*` 而不是 `glass_*`，是因为后者会随系统深浅模式翻成白色。
+      2. 顶栏按钮 32dp → 40dp，键位 36dp → 40dp：都在 Apple HIG 的 44dp 触控下限附近，
+         原尺寸在真机上偏难点中。
+      3. `scriptDoneDivider` 的硬编码 #30363D 换成 `@color/dark_stroke`，与新的高光线同源。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF0D1117"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dark_top_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="6dp">
+
+        <TextView
+            android:id="@+id/modeText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/terminal_mode_text"
+            android:textColor="#FF7EE787"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/newTabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="+"
+            android:textColor="#FFC9D1D9"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/closeTabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="×"
+            android:textColor="#FFC9D1D9"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/settingsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="设置"
+            android:textColor="#FFC9D1D9"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/exitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:text="退出"
+            android:textColor="#FFF85149"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_bar_glass"
+        app:tabMode="scrollable"
+        app:tabTextColor="#FF8B949E"
+        app:tabSelectedTextColor="#FF7EE787"
+        app:tabIndicatorColor="#FF7EE787"
+        xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+    <!--
+        必须显式声明 focusable / focusableInTouchMode：
+        TerminalView 继承自 View，默认两者都是 false，requestFocus() 会直接失败，
+        导致 onCreateInputConnection() 不被调用、输入法无法附着到终端。
+    -->
+    <com.termux.view.TerminalView
+        android:id="@+id/terminalView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <!--
+        脚本结束后的提示条。
+
+        脚本跑完时，终端不再是一个「可用的终端」：屏幕上留着输出，但任何输入都会
+        退回文件管理。提示条就是这件事的唯一说明 —— 少了它，用户看到的是一个
+        既敲不进字、又赖着不走的窗口。
+
+        位置固定在终端下方、屏幕按键行上方：脚本结束后屏幕按键行会被收起
+        （见 TerminalActivity.applyFinishedUi），这里正好接管那块位置。
+    -->
+    <View
+        android:id="@+id/scriptDoneDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dark_stroke"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/scriptDoneBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dark_bottom_bar"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/scriptDoneTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terminal_script_done"
+            android:textColor="#FF7EE787"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/scriptDoneHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/terminal_script_done_hint"
+            android:textColor="#FF8B949E"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/keyBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dark_bottom_bar"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="5dp">
+
+            <!--
+                键位文字**必须写在布局里**。
+
+                代码那边的 `bindKey(R.id.keyEsc, "\u001b")` 里那个字符串是
+                **按键时要发给终端的转义序列**，跟「显示什么」毫无关系 ——
+                它只挂点击监听，从不设 text。这排键此前因此一直是**空白方块**
+                （以前没有背景、完全看不见，加了键帽才显形）。
+                改这几个键的**行为**看 TerminalActivity，改**长相**只看这里。
+            -->
+            <TextView
+                android:id="@+id/keyEsc"
+                style="@style/TerminalKey"
+                android:text="ESC" />
+
+            <TextView
+                android:id="@+id/keyTab"
+                style="@style/TerminalKey"
+                android:text="TAB" />
+
+            <TextView
+                android:id="@+id/keyCtrl"
+                style="@style/TerminalKey"
+                android:text="CTRL" />
+
+            <TextView
+                android:id="@+id/keyAlt"
+                style="@style/TerminalKey"
+                android:text="ALT" />
+
+            <TextView
+                android:id="@+id/keyLeft"
+                style="@style/TerminalKey"
+                android:text="←"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/keyDown"
+                style="@style/TerminalKey"
+                android:text="↓"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/keyUp"
+                style="@style/TerminalKey"
+                android:text="↑"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/keyRight"
+                style="@style/TerminalKey"
+                android:text="→"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/keyHome"
+                style="@style/TerminalKey"
+                android:text="HOME" />
+
+            <TextView
+                android:id="@+id/keyEnd"
+                style="@style/TerminalKey"
+                android:text="END" />
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>
